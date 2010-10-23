@@ -64,6 +64,7 @@ Requires: hamlib
 %setup
 
 %build
+autoreconf -fi
 
 LIBS="-lpthread" CFLAGS="-pthread" %configure --without-cxx-binding   \
 	   --without-perl-binding  \
