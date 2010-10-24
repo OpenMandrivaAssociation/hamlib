@@ -8,7 +8,7 @@ Name:		hamlib
 Version:	%{version}
 Release:	%mkrel %{rel}
 License:	LGPL
-Group:		Communications
+Group:		Development/Other
 Url:		http://hamlib.sourceforge.net
 Source:		http://hamlib.sourceforge.net/%{name}-%{version}.tar.gz
 #BuildRequires: 		python 
@@ -44,7 +44,7 @@ BuildRequires:		libusb-devel
 
 %package devel
 Summary: Development library to control radio transcievers and receivers
-Group: Development/Libraries
+Group: Development/Other
 Requires: hamlib
 
 %description devel
