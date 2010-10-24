@@ -3,7 +3,7 @@
 %define version	1.2.12
 %define rel	1
 
-Summary:	Run-time library to control radio transcievers and receivers
+Summary:	Run-time library to control radio transceivers and receivers
 Name:		hamlib
 Version:	%{version}
 Release:	%mkrel %{rel}
