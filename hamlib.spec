@@ -1,5 +1,3 @@
-# based on opensuse's specfile
-
 %define version	1.2.12
 %define rel	1
 
@@ -11,18 +9,11 @@ License:	LGPL
 Group:		Development/Other
 Url:		http://hamlib.sourceforge.net
 Source:		http://hamlib.sourceforge.net/%{name}-%{version}.tar.gz
-#BuildRequires: 		python 
-BuildRequires:		glibc-devel 
-#BuildRequires:		binutils 
-#BuildRequires:		libtool 
-#BuildRequires:		findutils-locate 
+BuildRequires:		glibc-devel  
 BuildRequires:		textutils 
-#BuildRequires:		make 
-#BuildRequires:		patch
 BuildRequires:		fileutils 
 BuildRequires:		libxml2-devel 
 BuildRequires:		libusb-devel 
-#BuildRequires:pkg-config
 
 
 %description
@@ -72,7 +63,7 @@ LIBS="-lpthread" CFLAGS="-pthread" %configure --without-cxx-binding   \
 	   --without-tcl-binding   \
 	   --without-python-binding
 %make 
-#CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" all
+
 
 %install
 %makeinstall_std
