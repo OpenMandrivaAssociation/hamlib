@@ -1,102 +1,147 @@
+%define name	hamlib
 %define version	1.2.12
-%define rel	1
+%define rel	2
 
-Summary:	Run-time library to control radio transceivers and receivers
-Name:		hamlib
+%define major	2
+%define libname	%mklibname %{name} %{major}
+%define devname	%mklibname -d %{name}
+
+%define major_cxx	2
+%define libname_cxx	%mklibname %{name}++ %{major_cxx}
+%define devname_cxx	%mklibname -d %{name}++
+
+Summary:	Control radio transceivers and receivers
+Name:		%{name}
 Version:	%{version}
 Release:	%mkrel %{rel}
-License:	LGPL
-Group:		Development/Other
+License:	LGPLv2+
+Group:		Communications
 Url:		http://hamlib.sourceforge.net
 Source:		http://hamlib.sourceforge.net/%{name}-%{version}.tar.gz
-BuildRequires:		glibc-devel  
-BuildRequires:		textutils 
-BuildRequires:		fileutils 
-BuildRequires:		libxml2-devel 
-BuildRequires:		libusb-devel 
-
+BuildRequires:	libxml2-devel 
+BuildRequires:	libusb-devel 
+BuildRequires:	tirpc-devel
+BuildRequires:	gd-devel
 
 %description
- Most recent amateur radio transceivers allow external control of their
- functions through a computer interface. Unfortunately, control commands are
- not always consistent across a manufacturer's product line and each
- manufacturer's product line differs greatly from its competitors.
- .
- This library addresses that issue by providing a standardised programming
- interface that applications can talk to and translating that into the
- appropriate commands required by the radio in use.
- .
- This package provides the run-time form of the library. If you wish to
- develop software using this library you need the 'hamlib-devel' package.
- .
- Also included in the package is a simple radio control program 'rigctl',
- which let one control a radio transceiver or receiver, either from
- command line interface or in a text-oriented interactive interface.
+Hamlib provides a standardized programming interface that applications
+can use to send the appropriate commands to a radio.
 
-%package devel
-Summary: Development library to control radio transcievers and receivers
-Group: Development/Other
-Requires: hamlib
+%package -n %{libname}
+Summary:	Run-time library to control radio transceivers and receivers
+Group:		Communications
+Provides:	%{name} = %{version}-%{release}
+Obsoletes:	%{name} < %{version}-%{release}
 
-%description devel
- Most recent amateur radio transceivers allow external control of their
- functions through a computer interface. Unfortunately, control commands are
- not always consistent across a manufacturer's product line and each
- manufacturer's product line differs greatly from its competitors.
- .
- This library addresses that issue by providing a standardised programming
- interface that applications can talk to and translating that into the
- appropriate commands required by the radio in use.
- .
- This package provides the development library. If you wish to run applications
- developed using this library you'll need the 'hamlib' package.
+%description -n %{libname}
+Hamlib provides a standardized programming interface that applications
+can use to send the appropriate commands to a radio.
+
+%package utils
+Summary:	Utilities to support the hamlib radio control library
+Group:		Communications
+
+%description utils
+Hamlib provides a standardized programming interface that applications
+can use to send the appropriate commands to a radio.
+
+This package provides a command-line utility to test the hamlib library and
+to control transceivers if you're short of anything more sophisticated. 
+
+%package -n %{devname}
+Summary:	Development library to control radio transcievers and receivers
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
+Provides:	lib%{name} = %{version}-%{release}
+
+%description -n %{devname}
+Hamlib provides a standardized programming interface that applications
+can use to send the appropriate commands to a radio.
+
+This package provides the development files and headers.
+
+%package -n %{libname_cxx}
+Summary:	Hamlib radio control library C++ binding
+Group:		Communications
+
+%description -n %{libname_cxx}
+Hamlib provides a standardized programming interface that applications
+can use to send the appropriate commands to a radio.
+
+This package contains Hamlib radio control library C++ language binding.
+
+%package -n %{devname_cxx}
+Summary:	Hamlib radio control library C++ binding development headers and libraries
+Group:		Development/C++
+Requires:	%{libname_cxx} = %{version}-%{release}
+Provides:	%{name}++-devel = %{version}-%{release}
+Provides:	lib%{name}++-devel = %{version}-%{release}
+
+%description -n %{devname_cxx}
+Hamlib provides a standardized programming interface that applications
+can use to send the appropriate commands to a radio.
+
+This package contains Hamlib radio control library C++ binding development
+headers and libraries for building C++ applications with Hamlib.
 
 %prep
-%setup
+%setup -q
 
 %build
-autoreconf -fi
-
-LIBS="-lpthread" CFLAGS="-pthread" %configure --without-cxx-binding   \
-	   --without-perl-binding  \
-	   --without-kylix-binding \
-	   --without-tcl-binding   \
-	   --without-python-binding
+%configure2_5x \
+	--disable-static \
+	--disable-rpath \
+	--with-rigmatrix \
+	--without-perl-binding \
+	--without-kylix-binding \
+	--without-tcl-binding \
+	--without-python-binding
 %make 
 
-
 %install
+rm -rf %{buildroot}
 %makeinstall_std
 
+#we don't want these
+find %{buildroot} -name "*.la" -exec rm {} \;
+
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
-
-%files
-%defattr(644, root, root, 755)
-%doc COPYING
-
-%{_mandir}/man1/*
-%{_mandir}/man8/*
-
-%defattr(755, root, root, 755)
-%{_libdir}/libhamlib.so.*
+%files -n %{libname}
+%defattr(-,root,root)
+%doc AUTHORS ChangeLog PLAN README THANKS TODO
+%{_libdir}/libhamlib.so.%{major}*
 %{_libdir}/hamlib-*.so
 
+%files -n %{libname_cxx}
+%defattr(-,root,root)
+%{_libdir}/libhamlib++.so.%{major_cxx}*
+
+%files utils
+%defattr(-,root,root)
+%{_mandir}/man1/*
+%{_mandir}/man8/*
 %{_bindir}/*
 %{_sbindir}/*
 
-%files devel
-%defattr(644, root, root, 755)
-%dir %{_includedir}/hamlib
-%{_includedir}/hamlib/*.h
+%files -n %{devname}
+%defattr(-,root,root)
+%doc README.developer
+%dir %{_includedir}/%{name}
+%{_includedir}/%{name}/rig.h
+%{_includedir}/%{name}/riglist.h
+%{_includedir}/%{name}/rig_dll.h
+%{_includedir}/%{name}/rotator.h
+%{_includedir}/%{name}/rotlist.h
 %{_datadir}/aclocal/hamlib.m4
 %{_libdir}/pkgconfig/hamlib.pc
 %{_libdir}/libhamlib.so
-%{_libdir}/*.la
-%{_libdir}/*.a
 
-
+%files -n %{devname_cxx}
+%defattr(-,root,root)
+%doc README.developer
+%{_libdir}/libhamlib++.so
+%{_includedir}/%{name}/rigclass.h
+%{_includedir}/%{name}/rotclass.h
