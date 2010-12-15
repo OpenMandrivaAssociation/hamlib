@@ -1,6 +1,6 @@
 %define name	hamlib
 %define version	1.2.12
-%define rel	2
+%define rel	3
 
 %define major	2
 %define libname	%mklibname %{name} %{major}
@@ -52,8 +52,9 @@ to control transceivers if you're short of anything more sophisticated.
 Summary:	Development library to control radio transcievers and receivers
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
+Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
-Provides:	lib%{name} = %{version}-%{release}
+Obsoletes:	%{name}-devel < %{version}-%{release}
 
 %description -n %{devname}
 Hamlib provides a standardized programming interface that applications
