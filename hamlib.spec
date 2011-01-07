@@ -1,6 +1,6 @@
 %define name	hamlib
 %define version	1.2.12
-%define rel	3
+%define rel	4
 
 %define major	2
 %define libname	%mklibname %{name} %{major}
@@ -22,6 +22,7 @@ BuildRequires:	libxml2-devel
 BuildRequires:	libusb-devel 
 BuildRequires:	tirpc-devel
 BuildRequires:	gd-devel
+BuildRequires:	usrp-devel
 
 %description
 Hamlib provides a standardized programming interface that applications
@@ -94,6 +95,7 @@ headers and libraries for building C++ applications with Hamlib.
 	--disable-static \
 	--disable-rpath \
 	--with-rigmatrix \
+	--with-usrp \
 	--without-perl-binding \
 	--without-kylix-binding \
 	--without-tcl-binding \
