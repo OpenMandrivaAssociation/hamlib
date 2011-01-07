@@ -23,6 +23,7 @@ BuildRequires:	libusb-devel
 BuildRequires:	tirpc-devel
 BuildRequires:	gd-devel
 BuildRequires:	usrp-devel
+BuildRequires:	boost-devel
 
 %description
 Hamlib provides a standardized programming interface that applications
