@@ -1,6 +1,6 @@
 %define name	hamlib
-%define version	1.2.12
-%define rel	4
+%define version	1.2.13
+%define rel	1
 
 %define major	2
 %define libname	%mklibname %{name} %{major}
@@ -117,7 +117,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog PLAN README THANKS TODO
 %{_libdir}/libhamlib.so.%{major}*
-%{_libdir}/hamlib-*.so
+%{_libdir}/hamlib/hamlib-*.so
 
 %files -n %{libname_cxx}
 %defattr(-,root,root)
