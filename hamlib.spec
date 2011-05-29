@@ -1,5 +1,5 @@
 %define name	hamlib
-%define version	1.2.13
+%define version	1.2.13.1
 %define rel	1
 
 %define major	2
@@ -17,7 +17,7 @@ Release:	%mkrel %{rel}
 License:	LGPLv2+
 Group:		Communications
 Url:		http://hamlib.sourceforge.net
-Source:		http://hamlib.sourceforge.net/%{name}-%{version}.tar.gz
+Source:		http://sourceforge.net/projects/%{name}/files/%{name}/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:	libxml2-devel 
 BuildRequires:	libusb-devel 
 BuildRequires:	tirpc-devel
