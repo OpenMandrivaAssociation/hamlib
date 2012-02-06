@@ -1,5 +1,5 @@
 %define name	hamlib
-%define version	1.2.13.1
+%define version	1.2.15
 %define rel	1
 
 %define major	2
@@ -13,7 +13,7 @@
 Summary:	Control radio transceivers and receivers
 Name:		%{name}
 Version:	%{version}
-Release:	%mkrel %{rel}
+Release:	%{rel}
 License:	LGPLv2+
 Group:		Communications
 Url:		http://hamlib.sourceforge.net
@@ -105,34 +105,26 @@ headers and libraries for building C++ applications with Hamlib.
 %make 
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 #we don't want these
 find %{buildroot} -name "*.la" -exec rm {} \;
 
-%clean
-rm -rf %{buildroot}
-
 %files -n %{libname}
-%defattr(-,root,root)
 %doc AUTHORS ChangeLog PLAN README THANKS TODO
 %{_libdir}/libhamlib.so.%{major}*
 %{_libdir}/hamlib/hamlib-*.so
 
 %files -n %{libname_cxx}
-%defattr(-,root,root)
 %{_libdir}/libhamlib++.so.%{major_cxx}*
 
 %files utils
-%defattr(-,root,root)
 %{_mandir}/man1/*
 %{_mandir}/man8/*
 %{_bindir}/*
 %{_sbindir}/*
 
 %files -n %{devname}
-%defattr(-,root,root)
 %doc README.developer
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/rig.h
@@ -145,7 +137,6 @@ rm -rf %{buildroot}
 %{_libdir}/libhamlib.so
 
 %files -n %{devname_cxx}
-%defattr(-,root,root)
 %doc README.developer
 %{_libdir}/libhamlib++.so
 %{_includedir}/%{name}/rigclass.h
