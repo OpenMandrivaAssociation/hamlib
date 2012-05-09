@@ -30,6 +30,7 @@ BuildRequires:	pkgconfig(gnuradio-uhd)
 BuildRequires:	pkgconfig(gruel)
 BuildRequires:	pkgconfig(gnuradio-fcd)
 BuildRequires:	pkgconfig(gnuradio-pager)
+BuildRequires:	pkgconfig(tcl)
 
 
 %description
