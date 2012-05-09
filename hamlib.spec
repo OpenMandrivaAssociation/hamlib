@@ -1,6 +1,6 @@
 %define name	hamlib
 %define version	1.2.15
-%define rel	1
+%define rel	2
 
 %define major	2
 %define libname	%mklibname %{name} %{major}
@@ -17,14 +17,15 @@ Release:	%{rel}
 License:	LGPLv2+
 Group:		Communications
 Url:		http://hamlib.sourceforge.net
-Source:		http://sourceforge.net/projects/%{name}/files/%{name}/%{version}/%{name}-%{version}.tar.gz
+Source0:	http://sourceforge.net/projects/%{name}/files/%{name}/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:	libxml2-devel 
 BuildRequires:	libusb-devel 
 BuildRequires:	tirpc-devel
 BuildRequires:	gd-devel
-BuildRequires:	usrp-devel
+#BuildRequires:	usrp-devel
+BuildRequires:	gnuradio-devel
 BuildRequires:	boost-devel
-BuildRequires:	libltdl-devel
+BuildRequires:	libtool-devel
 
 %description
 Hamlib provides a standardized programming interface that applications
