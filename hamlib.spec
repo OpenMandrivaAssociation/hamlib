@@ -1,6 +1,6 @@
 %define name	hamlib
-%define version	1.2.15
-%define rel	2
+%define version	1.2.15.1
+%define rel	1
 
 %define major	2
 %define libname	%mklibname %{name} %{major}
@@ -26,6 +26,11 @@ BuildRequires:	gd-devel
 BuildRequires:	gnuradio-devel
 BuildRequires:	boost-devel
 BuildRequires:	libtool-devel
+BuildRequires:	pkgconfig(gnuradio-uhd)
+BuildRequires:	pkgconfig(gruel)
+BuildRequires:	pkgconfig(gnuradio-fcd)
+BuildRequires:	pkgconfig(gnuradio-pager)
+
 
 %description
 Hamlib provides a standardized programming interface that applications
@@ -96,12 +101,10 @@ headers and libraries for building C++ applications with Hamlib.
 %build
 %configure2_5x \
 	--disable-static \
-	--disable-rpath \
 	--with-rigmatrix \
+	--enable-tcl-binding \
 	--with-usrp \
 	--without-perl-binding \
-	--without-kylix-binding \
-	--without-tcl-binding \
 	--without-python-binding
 %make 
 
