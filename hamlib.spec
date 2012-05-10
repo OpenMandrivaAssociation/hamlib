@@ -106,7 +106,7 @@ headers and libraries for building C++ applications with Hamlib.
 
 %package -n	perl-%{name}
 Summary:	Hamlib radio control library Perl binding
-Group:		Development/C
+Group:		Development/Perl
 Requires:	hamlib = %{version}-%{release}
 
 %description -n	perl-%{name}
@@ -114,7 +114,7 @@ Hamlib PERL Language bindings to allow radio control from PERL scripts.
 
 %package -n	python-%{name}
 Summary:	Hamlib radio control library Python binding
-Group:		Development/C
+Group:		Development/Python
 Requires:	hamlib = %{version}-%{release}
 
 %description -n	python-%{name}
