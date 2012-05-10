@@ -9,6 +9,7 @@
 %define major_cxx	2
 %define libname_cxx	%mklibname %{name}++ %{major_cxx}
 %define devname_cxx	%mklibname -d %{name}++
+%define libname_tcl	%mklibname -d tcl
 
 Summary:	Control radio transceivers and receivers
 Name:		%{name}
@@ -96,6 +97,32 @@ can use to send the appropriate commands to a radio.
 This package contains Hamlib radio control library C++ binding development
 headers and libraries for building C++ applications with Hamlib.
 
+
+
+%package -n	perl-%{name}
+Summary:	Hamlib radio control library Perl binding
+Group:		Development/C
+Requires:	hamlib = %{version}-%{release}
+
+%description -n	perl-%{name}
+Hamlib PERL Language bindings to allow radio control from PERL scripts.
+
+%package -n	python-%{name}
+Summary:	Hamlib radio control library Python binding
+Group:		Development/C
+Requires:	hamlib = %{version}-%{release}
+
+%description -n	python-%{name}
+Hamlib Python Language bindings to allow radio control from Python scripts.
+
+%package -n	%{libname_tcl}
+Summary:	Hamlib radio control library TCL binding
+Group:		System/Libraries
+Requires: hamlib = %{version}-%{release}
+
+%description -n %{libname_tcl}
+Hamlib TCL Language bindings to allow radio control from TCL scripts.
+
 %prep
 %setup -q
 
@@ -104,13 +131,23 @@ headers and libraries for building C++ applications with Hamlib.
 	--disable-static \
 	--with-rigmatrix \
 	--enable-tcl-binding \
-	--with-usrp \
-	--without-perl-binding \
-	--without-python-binding
+	--with-perl-binding \
+	--with-python-binding
+
+#usrp deprecated
+
 %make 
+
+make -C doc doc
 
 %install
 %makeinstall_std
+
+find %{buildroot} -type f -name Hamlib.so -exec chmod 0755 {} ';'
+find %{buildroot} -type f -name pkgIndex.tcl -exec rm -f {} ';'
+find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
+find %{buildroot} -type f -name Hamlib.bs -exec rm -f {} ';'
+find %{buildroot} -type f -name perltest.pl -exec rm -f {} ';'
 
 #we don't want these
 find %{buildroot} -name "*.la" -exec rm {} \;
@@ -146,3 +183,20 @@ find %{buildroot} -name "*.la" -exec rm {} \;
 %{_libdir}/libhamlib++.so
 %{_includedir}/%{name}/rigclass.h
 %{_includedir}/%{name}/rotclass.h
+
+
+%files -n perl-%{name}
+%doc COPYING.LIB
+#%{perl_vendorlib}/*
+%perl_sitelib/*/Hamlib.pm
+%perl_sitelib/*/auto/Hamlib/Hamlib.so
+
+%files -n python-%{name}
+%doc COPYING.LIB
+%{python_sitelib}/*.py*
+%{python_sitelib}/_Hamlib.so
+
+
+%files -n %{libname_tcl}
+%doc COPYING.LIB
+%{_libdir}/hamlibtcl*
