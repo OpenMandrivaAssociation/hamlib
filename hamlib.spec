@@ -1,6 +1,6 @@
 %define name	hamlib
 %define version	1.2.15.1
-%define rel	2
+%define rel	3
 
 %define major	2
 %define libname	%mklibname %{name} %{major}
@@ -9,7 +9,7 @@
 %define major_cxx	2
 %define libname_cxx	%mklibname %{name}++ %{major_cxx}
 %define devname_cxx	%mklibname -d %{name}++
-%define libname_tcl	%mklibname -d tcl
+%define libname_tcl	%mklibname -d hamlibtcl
 
 Summary:	Control radio transceivers and receivers
 Name:		%{name}
