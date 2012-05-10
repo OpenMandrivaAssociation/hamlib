@@ -32,6 +32,7 @@ BuildRequires:	pkgconfig(gruel)
 BuildRequires:	pkgconfig(gnuradio-fcd)
 BuildRequires:	pkgconfig(gnuradio-pager)
 BuildRequires:	pkgconfig(tcl)
+BuildRequires:	doxygen
 
 
 %description
