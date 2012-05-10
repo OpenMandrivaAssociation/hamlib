@@ -33,6 +33,7 @@ BuildRequires:	pkgconfig(gnuradio-fcd)
 BuildRequires:	pkgconfig(gnuradio-pager)
 BuildRequires:	pkgconfig(tcl)
 BuildRequires:	doxygen
+BuildRequires:	perl-devel
 BuildRequires:	perl(ExtUtils::MakeMaker)
 
 
