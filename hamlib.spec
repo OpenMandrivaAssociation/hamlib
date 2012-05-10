@@ -1,6 +1,6 @@
 %define name	hamlib
 %define version	1.2.15.1
-%define rel	1
+%define rel	2
 
 %define major	2
 %define libname	%mklibname %{name} %{major}
