@@ -203,4 +203,4 @@ find %{buildroot} -name "*.la" -exec rm {} \;
 
 %files -n %{libname_tcl}
 %doc COPYING.LIB
-%{_libdir}/hamlibtcl*
+#%{_libdir}/hamlibtcl*
