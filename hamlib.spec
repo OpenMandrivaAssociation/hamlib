@@ -197,8 +197,8 @@ find %{buildroot} -name "*.la" -exec rm {} \;
 
 %files -n python-%{name}
 %doc COPYING.LIB
-%{python_sitelib}/*.py*
-%{python_sitelib}/_Hamlib.so
+#%{python_sitelib}/*.py*
+#%{python_sitelib}/_Hamlib.so
 
 
 %files -n %{libname_tcl}
