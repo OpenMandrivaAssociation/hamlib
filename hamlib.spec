@@ -34,6 +34,7 @@ BuildRequires:	pkgconfig(gnuradio-pager)
 BuildRequires:	pkgconfig(tcl)
 BuildRequires:	doxygen
 BuildRequires:	perl-devel
+BuildRequires:	python-devel
 BuildRequires:	perl(ExtUtils::MakeMaker)
 
 
