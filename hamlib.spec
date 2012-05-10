@@ -191,8 +191,8 @@ find %{buildroot} -name "*.la" -exec rm {} \;
 %files -n perl-%{name}
 %doc COPYING.LIB
 #%{perl_vendorlib}/*
-%perl_sitelib/*/Hamlib.pm
-%perl_sitelib/*/auto/Hamlib/Hamlib.so
+#%perl_sitelib/*/Hamlib.pm
+#%perl_sitelib/*/auto/Hamlib/Hamlib.so
 
 %files -n python-%{name}
 %doc COPYING.LIB
