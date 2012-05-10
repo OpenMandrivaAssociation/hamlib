@@ -33,6 +33,7 @@ BuildRequires:	pkgconfig(gnuradio-fcd)
 BuildRequires:	pkgconfig(gnuradio-pager)
 BuildRequires:	pkgconfig(tcl)
 BuildRequires:	doxygen
+BuildRequires:	swig
 BuildRequires:	perl-devel
 BuildRequires:	python-devel
 BuildRequires:	perl(ExtUtils::MakeMaker)
@@ -192,15 +193,15 @@ find %{buildroot} -name "*.la" -exec rm {} \;
 %files -n perl-%{name}
 %doc COPYING.LIB
 #%{perl_vendorlib}/*
-#%perl_sitelib/*/Hamlib.pm
-#%perl_sitelib/*/auto/Hamlib/Hamlib.so
+%perl_sitelib/*/Hamlib.pm
+%perl_sitelib/*/auto/Hamlib/Hamlib.so
 
 %files -n python-%{name}
 %doc COPYING.LIB
-#%{python_sitelib}/*.py*
-#%{python_sitelib}/_Hamlib.so
+%{python_sitelib}/*.py*
+%{python_sitelib}/_Hamlib.so
 
 
 %files -n %{libname_tcl}
 %doc COPYING.LIB
-#%{_libdir}/hamlibtcl*
+%{_libdir}/hamlibtcl*
