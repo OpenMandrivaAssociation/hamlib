@@ -1,6 +1,6 @@
 %define name	hamlib
 %define version	1.2.15.1
-%define rel	3
+%define rel	4
 
 %define major	2
 %define libname	%mklibname %{name} %{major}
@@ -123,7 +123,8 @@ Hamlib Python Language bindings to allow radio control from Python scripts.
 %package -n	%{libname_tcl}
 Summary:	Hamlib radio control library TCL binding
 Group:		System/Libraries
-Requires: hamlib = %{version}-%{release}
+Requires:	hamlib = %{version}-%{release}
+Provides:	%{name}-tcl-devel = %{version}-%{release}
 
 %description -n %{libname_tcl}
 Hamlib TCL Language bindings to allow radio control from TCL scripts.
