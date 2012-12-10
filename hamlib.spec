@@ -1,5 +1,5 @@
 %define name	hamlib
-%define version	1.2.15.2
+%define version	1.2.15.3
 %define rel	1
 
 %define major	2
@@ -19,23 +19,23 @@ License:	LGPLv2+
 Group:		Communications
 Url:		http://hamlib.sourceforge.net
 Source0:	http://sourceforge.net/projects/%{name}/files/%{name}/%{version}/%{name}-%{version}.tar.gz
-BuildRequires:	libxml2-devel 
-BuildRequires:	libusb-devel 
+BuildRequires:	pkgconfig(libxml-2.0) 
+BuildRequires:	pkgconfig(libusb-1.0) 
 BuildRequires:	tirpc-devel
 BuildRequires:	gd-devel
 #BuildRequires:	usrp-devel
-BuildRequires:	gnuradio-devel
+BuildRequires:	pkgconfig(gnuradio-core)
 BuildRequires:	boost-devel
 BuildRequires:	libtool-devel
 BuildRequires:	pkgconfig(gnuradio-uhd)
 BuildRequires:	pkgconfig(gruel)
 BuildRequires:	pkgconfig(gnuradio-fcd)
 BuildRequires:	pkgconfig(gnuradio-pager)
-BuildRequires:	pkgconfig(tcl)
+BuildRequires:	tcl-devel
 BuildRequires:	doxygen
 BuildRequires:	swig
 BuildRequires:	perl-devel
-BuildRequires:	python-devel
+BuildRequires:	pkgconfig(python)
 BuildRequires:	perl(ExtUtils::MakeMaker)
 
 
@@ -206,3 +206,80 @@ find %{buildroot} -name "*.la" -exec rm {} \;
 %files -n %{libname_tcl}
 %doc COPYING.LIB
 %{_libdir}/hamlibtcl*
+
+
+%changelog
+* Wed Aug 15 2012 Alexander Khrukin <akhrukin@mandriva.org> 1.2.15.2-1
++ Revision: 814912
+- version update 1.2.15.2
+- Group: fix
+
+* Thu May 10 2012 Alexander Khrukin <akhrukin@mandriva.org> 1.2.15.1-4
++ Revision: 798004
+- Provides: hamlib-tcl-devel
+
+* Thu May 10 2012 Alexander Khrukin <akhrukin@mandriva.org> 1.2.15.1-3
++ Revision: 798003
+- limlibtcl instead of libtcl
+
+* Thu May 10 2012 Alexander Khrukin <akhrukin@mandriva.org> 1.2.15.1-2
++ Revision: 797993
+- swig in BR
+- perl and python packages
+
+* Thu May 10 2012 Alexander Khrukin <akhrukin@mandriva.org> 1.2.15.1-1
++ Revision: 797979
+- test build
+- test build
+- BR: python-devel
+- test build
+- BR: perl-devel
+- BR: perl(ExtUtils::MakeMaker)
+- BR: doxygen
+- perl and python packages
+- BR: pkgconfig(tcl)
+- version update 1.2.15.1
+- BR a few br
+- version update rebuild for new gnuradio
+
+* Mon Feb 06 2012 Alexander Khrukin <akhrukin@mandriva.org> 1.2.15-1
++ Revision: 771324
+- version update 1.2.15
+
+* Sun May 29 2011 Jani Välimaa <wally@mandriva.org> 1.2.13.1-1
++ Revision: 681719
+- new version 1.2.13.1
+
+* Mon Mar 14 2011 Jani Välimaa <wally@mandriva.org> 1.2.13-1
++ Revision: 644611
+- add libltdl-devel BR
+- new version 1.2.13
+
+* Fri Jan 07 2011 Jani Välimaa <wally@mandriva.org> 1.2.12-4mdv2011.0
++ Revision: 629631
+- add boost-devel BR
+- build with USRP backend
+
+* Wed Dec 15 2010 Jani Välimaa <wally@mandriva.org> 1.2.12-3mdv2011.0
++ Revision: 621891
+- obsolete old hamlib-devel package
+- fix provides
+
+* Tue Dec 14 2010 Jani Välimaa <wally@mandriva.org> 1.2.12-2mdv2011.0
++ Revision: 621828
+- libify hamlib
+- split utils to a separate subpackage
+- enable subpackages for c++ binding and c++ binding devel headers and libraries
+- clean .spec
+
+  + Thomas Spuhler <tspuhler@mandriva.org>
+    - cleaned specfile
+    - fixed spelling in description
+
+* Sun Oct 24 2010 Thomas Spuhler <tspuhler@mandriva.org> 1.2.12-1mdv2011.0
++ Revision: 587823
+- changed Group to Development/Other
+- added autoreconf -fi
+- re-aclocaled
+- import hamlib
+
