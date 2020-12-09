@@ -9,7 +9,7 @@
 Summary:	Control radio transceivers and receivers
 Name:		hamlib
 Version:	3.3
-Release:	3
+Release:	4
 License:	LGPLv2+
 Group:		Communications/Radio
 Url:		http://hamlib.sourceforge.net
@@ -125,7 +125,7 @@ find %{buildroot} -name "*.la" -delete
 %files -n %{devname}
 %doc README.developer
 %{_defaultdocdir}/%{name}/*
-%{_infodir}/hamlib.info.xz
+%{_infodir}/hamlib.info.*
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/rig.h
 %{_includedir}/%{name}/riglist.h
