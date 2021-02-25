@@ -1,22 +1,22 @@
-%define major	2
+%define major	4
 %define libname	%mklibname %{name} %{major}
 %define devname	%mklibname -d %{name}
 
-%define major_cxx 2
+%define major_cxx 4
 %define libname_cxx %mklibname %{name}++ %{major_cxx}
 %define devname_cxx %mklibname -d %{name}++
 
 Summary:	Control radio transceivers and receivers
 Name:		hamlib
-Version:	3.3
-Release:	4
+Version:	4.1
+Release:	1
 License:	LGPLv2+
 Group:		Communications/Radio
-Url:		http://hamlib.sourceforge.net
-Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Url:		https://hamlib.github.io/
+Source0:	https://github.com/Hamlib/Hamlib/archive/%{version}.tar.gz
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(libusb) >= 0.1
-BuildRequires:	pkgconfig(gdlib)
+#BuildRequires:	pkgconfig(gdlib)
 BuildRequires:	libltdl-devel
 
 %description
@@ -83,7 +83,7 @@ This package contains Hamlib radio control library C++ binding development
 headers and libraries for building C++ applications with Hamlib.
 
 %prep
-%setup -q
+%setup -q -n Hamlib-%{version}
 sed -i 's|usrp|uhd|g' configure.ac
 sed -i 's!AX_CFLAGS_WARN_ALL(\[AM_CFLAGS\])!!'g configure.ac
 sed -i 's!AX_CXXFLAGS_WARN_ALL(\[AM_CXXFLAGS\])!!g' configure.ac
@@ -111,7 +111,7 @@ libtoolize --copy --force
 find %{buildroot} -name "*.la" -delete
 
 %files -n %{libname}
-%doc AUTHORS ChangeLog PLAN README THANKS TODO
+%doc AUTHORS ChangeLog PLAN README THANKS
 %{_libdir}/libhamlib.so.%{major}{,.*}
 %{_libdir}/libhamlib.so
 
@@ -125,7 +125,6 @@ find %{buildroot} -name "*.la" -delete
 %files -n %{devname}
 %doc README.developer
 %{_defaultdocdir}/%{name}/*
-%{_infodir}/hamlib.info.*
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/rig.h
 %{_includedir}/%{name}/riglist.h
@@ -139,5 +138,4 @@ find %{buildroot} -name "*.la" -delete
 %files -n %{devname_cxx}
 %doc README.developer
 %{_libdir}/libhamlib++.so
-%{_includedir}/%{name}/rigclass.h
-%{_includedir}/%{name}/rotclass.h
+%{_includedir}/%{name}/*.h
