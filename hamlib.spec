@@ -8,12 +8,12 @@
 
 Summary:	Control radio transceivers and receivers
 Name:		hamlib
-Version:	4.1
+Version:	4.4
 Release:	1
 License:	LGPLv2+
 Group:		Communications/Radio
 Url:		https://hamlib.github.io/
-Source0:	https://github.com/Hamlib/Hamlib/archive/%{version}.tar.gz
+Source0:	https://github.com/Hamlib/Hamlib/archive/hamlib-%{version}.tar.gz
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(libusb) >= 0.1
 #BuildRequires:	pkgconfig(gdlib)
@@ -83,7 +83,7 @@ This package contains Hamlib radio control library C++ binding development
 headers and libraries for building C++ applications with Hamlib.
 
 %prep
-%setup -q -n Hamlib-%{version}
+%setup -q -n hamlib-%{version}
 sed -i 's|usrp|uhd|g' configure.ac
 sed -i 's!AX_CFLAGS_WARN_ALL(\[AM_CFLAGS\])!!'g configure.ac
 sed -i 's!AX_CXXFLAGS_WARN_ALL(\[AM_CXXFLAGS\])!!g' configure.ac
