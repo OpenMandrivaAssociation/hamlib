@@ -16,6 +16,7 @@ Url:		https://hamlib.github.io/
 Source0:	https://github.com/Hamlib/Hamlib/archive/hamlib-%{version}.tar.gz
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(libusb) >= 0.1
+BuildRequires:	pkgconfig(readline)
 #BuildRequires:	pkgconfig(gdlib)
 BuildRequires:	libltdl-devel
 
