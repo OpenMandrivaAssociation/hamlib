@@ -9,7 +9,7 @@
 Summary:	Control radio transceivers and receivers
 Name:		hamlib
 Version:	4.4
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		Communications/Radio
 Url:		https://hamlib.github.io/
