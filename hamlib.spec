@@ -19,7 +19,8 @@ Source0:	https://github.com/Hamlib/Hamlib/archive/%{version}/%{name}-%{version}.
 # Fix perl install
 Patch0:		hamlib-4.6.5-perl-install.patch
 
-BuildRequires:	automake autoconf libtool
+BuildRequires:	automake autoconf slibtool
+BuildRequires:	libtool-base
 BuildRequires:	doxygen
 BuildRequires:	cmake(boost)
 BuildRequires:	perl-devel
