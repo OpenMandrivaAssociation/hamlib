@@ -21,7 +21,7 @@ Patch0:		Hamlib-4.7.0-perl-install.patch
 
 BuildRequires:	automake autoconf slibtool
 BuildRequires:	libtool-base
-BuildRequires:	cmake(boost)
+BuildRequires:	boost-devel
 BuildRequires:	doxygen
 BuildRequires:	libnova-devel
 BuildRequires:	perl-devel
