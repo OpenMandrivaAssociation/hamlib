@@ -8,31 +8,34 @@
 
 %define oname Hamlib
 
-Summary:	Control radio transceivers and receivers
 Name:		hamlib
-Version:	4.6.5
-Release:	3
+Summary:	Control radio transceivers and receivers
+Version:	4.7.0
+Release:	1
 License:	GPL-2.0-or-later and LGPL-2.0-or-later
 Group:		Communications/Radio
 Url:		https://hamlib.github.io/
 Source0:	https://github.com/Hamlib/Hamlib/archive/%{version}/%{name}-%{version}.tar.gz
 # Fix perl install
-Patch0:		hamlib-4.6.5-perl-install.patch
+Patch0:		Hamlib-4.7.0-perl-install.patch
 
 BuildRequires:	automake autoconf slibtool
 BuildRequires:	libtool-base
-BuildRequires:	doxygen
 BuildRequires:	cmake(boost)
+BuildRequires:	doxygen
+BuildRequires:	libnova-devel
 BuildRequires:	perl-devel
 BuildRequires:	perl-ExtUtils-MakeMaker
 BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(gdlib)
+BuildRequires:	pkgconfig(libindi)
 BuildRequires:	pkgconfig(libusb-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(readline)
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(tcl)
+BuildRequires:	pkgconfig(usrp)
 BuildRequires:	rpm-build
 BuildRequires:	source-highlight
 BuildRequires:	swig
@@ -152,35 +155,32 @@ for the hamlib radio control library API.
 
 %prep
 %autosetup -n %{oname}-%{version} -p1
-sed -i 's|usrp|uhd|g' configure.ac
-sed -i 's!AX_CFLAGS_WARN_ALL(\[AM_CFLAGS\])!!'g configure.ac
-sed -i 's!AX_CXXFLAGS_WARN_ALL(\[AM_CXXFLAGS\])!!g' configure.ac
-rm -f macros/ax_cflags_warn_all.m4
-rm -f configure
 
 %build
-export PYTHON=%{__python}
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
-export LDFLAGS="%{optflags} -llua" # -lpython"
+export LDFLAGS="%{optflags} -llua -lusrp"
 autoreconf -fiv
 #libtoolize --copy --force
 %configure \
+	PYTHON="%{__python3}" \
 	--disable-static \
+	--disable-pytest \
+	--enable-uhd \
+	--enable-usrp \
 	--with-rigmatrix \
 	--with-xml-support \
-	--enable-uhd \
 	--with-cxx-binding \
 	--with-lua-binding \
 	--with-perl-binding \
-	--with-python-binding PYTHON_VERSION=%{pyver} \
+	--with-python-binding \
 	--with-tcl-binding \
-	--with-tcl=/usr/%{_lib}
+	--with-tcl=%{_prefix}/%{_lib}
 
 %make_build
 
 # Build Documentation
-make -C doc doc
+%make_build -C doc doc
 
 %install
 %make_install
@@ -208,7 +208,8 @@ find %{buildroot} -type f -name Hamlib.bs -exec rm -f {} ';'
 
 
 %check
-make V=1 check
+CI=true PYTHONPATH="%{buildroot}%{python_sitearch}:${PWD}" \
+LD_LIBRARY_PATH=%{buildroot}/%{_libdir} %make_build check
 
 %post -n %{libname} -p /sbin/ldconfig
 %post -n %{libname_cxx} -p /sbin/ldconfig
@@ -261,9 +262,9 @@ make V=1 check
 
 %files -n python-%{name}
 %license COPYING COPYING.LIB
-%{python3_sitearch}/Hamlib.*
-%{python3_sitearch}/_Hamlib.*
-%{python3_sitearch}/__pycache__/Hamlib.cpython*.pyc
+%{python_sitearch}/Hamlib.*
+%{python_sitearch}/_Hamlib.*
+%{python_sitearch}/__pycache__/Hamlib.cpython*.pyc
 
 %files -n tcl-%{name}
 %license COPYING COPYING.LIB

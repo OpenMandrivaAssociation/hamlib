@@ -1,0 +1,12 @@
+diff -urN Hamlib-4.7.0/bindings/Makefile.am Hamlib-4.7.0-perl-install/bindings/Makefile.am
+--- Hamlib-4.7.0/bindings/Makefile.am	2026-02-15 21:14:25.000000000 +0000
++++ Hamlib-4.7.0-perl-install/bindings/Makefile.am	2026-02-16 19:51:20.937071149 +0000
+@@ -85,7 +85,7 @@
+ 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -f Hamlib-pl.mk distcheck
+ 
+ install-perl: Hamlib-pl.mk
+-	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -f Hamlib-pl.mk install_site
++	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -f Hamlib-pl.mk pure_vendor_install
+ 
+ ## ExtUtils::MakeMaker says uninstall is deprecated and won't remove the files
+ ## anyway, so we'll have to figure out another way to remove the installed files.
