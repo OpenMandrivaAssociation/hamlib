@@ -11,7 +11,7 @@
 Name:		hamlib
 Summary:	Control radio transceivers and receivers
 Version:	4.7.0
-Release:	1
+Release:	2
 License:	GPL-2.0-or-later and LGPL-2.0-or-later
 Group:		Communications/Radio
 Url:		https://hamlib.github.io/
