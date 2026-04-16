@@ -10,12 +10,13 @@
 
 Name:		hamlib
 Summary:	Control radio transceivers and receivers
-Version:	4.7.0
-Release:	2
-License:	GPL-2.0-or-later and LGPL-2.0-or-later
+Version:	4.7.1
+Release:	1
+License:	GPL-2.0-or-later AND LGPL-2.1-or-later
 Group:		Communications/Radio
 Url:		https://hamlib.github.io/
 Source0:	https://github.com/Hamlib/Hamlib/archive/%{version}/%{name}-%{version}.tar.gz
+Source100:	%{name}.rpmlintrc
 # Fix perl install
 Patch0:		Hamlib-4.7.0-perl-install.patch
 
@@ -165,7 +166,6 @@ autoreconf -fiv
 %configure \
 	PYTHON="%{__python3}" \
 	--disable-static \
-	--disable-pytest \
 	--enable-uhd \
 	--enable-usrp \
 	--with-rigmatrix \
