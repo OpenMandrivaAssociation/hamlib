@@ -10,8 +10,8 @@
 
 Name:		hamlib
 Summary:	Control radio transceivers and receivers
-Version:	4.7.1
-Release:2
+Version:	4.7.2
+Release:1
 License:	GPL-2.0-or-later AND LGPL-2.1-or-later
 Group:		Communications/Radio
 Url:		https://hamlib.github.io/
@@ -155,7 +155,7 @@ This package provides the developers documentation and exmaples
 for the hamlib radio control library API.
 
 %prep
-%autosetup -n %{oname}-%{version} -p1
+%autosetup -n Hamlib-4.7.2 -p1
 
 %build
 export CFLAGS="%{optflags}"
